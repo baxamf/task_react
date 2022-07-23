@@ -1,0 +1,21 @@
+.primary {
+  min-width: 40vw;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #1a2723, #3e4c41);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1rem;
+}
+
+.primary input {
+  flex: 1;
+}
+
+.primary button {
+  background-color: rgb(144, 221, 188);
+  flex-shrink: 0;
+}
+
+.primary button:hover {
+  background-color: rgb(90, 217, 162);
+}

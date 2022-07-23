@@ -1,0 +1,34 @@
+.task_item {
+  position: relative;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(45deg, #1a2723, #3e4c41);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.task_item p {
+  flex: 1 0 auto;
+}
+
+.btns_container {
+  height: 38px;
+  display: flex;
+  gap: 1rem;
+}
+
+.btns_container h2 {
+  font-size: 2rem;
+  background: linear-gradient(to top, rgb(144, 221, 188), rgb(41, 168, 113));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 50em) {
+  .task_item {
+    flex-direction: column;
+  }
+}
