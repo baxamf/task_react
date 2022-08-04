@@ -12,3 +12,7 @@ body {
   color: rgb(191, 202, 198);
   background: linear-gradient(45deg, #1a2723, #080a09);
 }
+
+a {
+  all: unset;
+}

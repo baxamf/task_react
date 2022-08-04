@@ -1,0 +1,6 @@
+.edit {
+  min-height: 100vh;
+  gap: 2rem;
+  display: grid;
+  place-content: center;
+}
