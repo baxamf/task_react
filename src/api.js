@@ -15,7 +15,7 @@ export default class Queries {
   static del(id) {
     axios.delete(`${URL}/${id}`);
   }
-  static edit(id, title) {
-    axios.put(`${URL}/${id}`, title);
+  static edit(id, update) {
+    axios.put(`${URL}/${id}`, update);
   }
 }

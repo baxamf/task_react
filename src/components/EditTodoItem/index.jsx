@@ -3,7 +3,7 @@ import Queries from "../../api";
 import Button from "../UI/Button";
 import Input from "../UI/Input/Input";
 import styles from "./EditTodoItem.module.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function EditTodoItem() {
   let { id } = useParams();
@@ -11,6 +11,7 @@ export default function EditTodoItem() {
   const [task, setTask] = useState({});
   const [inputVisibility, setInputVisibility] = useState(false);
   const [taskInput, setTaskInput] = useState("");
+  const { editRerender } = useOutletContext();
 
   useEffect(() => {
     Queries.getSingle(id).then((resp) => {
@@ -26,15 +27,18 @@ export default function EditTodoItem() {
       return;
     }
     if (inputVisibility && taskInput !== task.title) {
-      Queries.edit(id, { title: taskInput.trim() });
-      navigate("/", { replace: true });
+      const newTitle = { title: taskInput.trim() };
+      Queries.edit(id, newTitle);
+      editRerender(id, newTitle);
+      navigate("/");
     }
     setInputVisibility(() => !inputVisibility);
   };
 
   const completeTask = (e) => {
     if (inputVisibility) return {};
-    Queries.edit(id, { completed: !task.completed });
+    const newStatus = { completed: !task.completed };
+    Queries.edit(id, newStatus);
   };
 
   const taskInputHandler = (e) => setTaskInput(e.target.value);

@@ -7,7 +7,7 @@ import styles from "./Form.module.css";
 export default function Form({ rerender, error }) {
   const [title, setTitle] = useState("");
 
-  async function addTask(e) {
+  function addTask(e) {
     e.preventDefault();
     if (title.trim() === "") {
       return error(true, "You can't do nothing. Try something.");
@@ -16,9 +16,10 @@ export default function Form({ rerender, error }) {
       title: title.trim(),
       completed: false,
     };
-    const resp = await Queries.add(newTask);
-    rerender(resp);
-    setTitle("");
+    Queries.add(newTask).then((resp) => {
+      rerender(resp.data);
+      setTitle("");
+    });
   }
 
   const changeInput = (e) => {
