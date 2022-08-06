@@ -1,7 +1,7 @@
 .primary {
   min-width: 40vw;
   padding: 1rem 2rem;
-  background: linear-gradient(45deg, #1a2723, #3e4c41);
+  background: linear-gradient(45deg, var(--main), var(--accent));
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   display: flex;
   gap: 1rem;
@@ -12,6 +12,7 @@
 }
 
 .primary button {
+  color: rgb(26, 39, 35);
   background-color: rgb(144, 221, 188);
   flex-shrink: 0;
 }

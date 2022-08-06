@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(45deg, #1a2723, #3e4c41);
+  background: linear-gradient(45deg, var(--main), var(--accent));
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 

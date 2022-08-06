@@ -1,0 +1,13 @@
+.btn {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  padding: 1rem;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--main), var(--accent));
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  left: 3rem;
+  top: 3rem;
+  cursor: pointer;
+}

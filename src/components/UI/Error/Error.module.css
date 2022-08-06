@@ -1,4 +1,13 @@
 .primary {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
   text-align: center;
-  color: rgb(240, 137, 137);
+  color: rgb(193, 67, 67);
+}
+
+.primary svg {
+  cursor: pointer;
+  font-size: 1.5rem;
 }

@@ -14,13 +14,12 @@ export default function EditTodoItem() {
   const [completed, setCompleted] = useState(null);
   const [taskInput, setTaskInput] = useState("");
   const [inputVisibility, setInputVisibility] = useState(false);
-  const { editRerender } = useOutletContext();
+  const { editRerender, tasks } = useOutletContext();
 
   useEffect(() => {
-    Queries.getSingle(id).then((resp) => {
-      setCompleted(resp.data.completed);
-      setTask(resp.data);
-    });
+    const editedTask = tasks.find((task) => task.id === id);
+    setCompleted(editedTask.completed);
+    setTask(editedTask);
   }, [id]);
 
   const editTask = () => {

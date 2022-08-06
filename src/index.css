@@ -4,13 +4,29 @@
   box-sizing: border-box;
 }
 
+.dark {
+  --accent: rgb(62, 76, 65);
+  --main: rgb(26, 39, 35);
+  --dark: rgb(8, 10, 9);
+  --text: rgb(191, 202, 198);
+  --active: rgb(231, 245, 240);
+}
+
+.light {
+  --accent: rgb(103, 137, 124);
+  --main: rgb(147, 172, 163);
+  --dark: rgb(116, 141, 132);
+  --text: rgb(37, 52, 47);
+  --active: rgb(16, 25, 22);
+}
+
 body {
   font-family: Consolas;
   min-height: 100vh;
   font-size: 18px;
   font-weight: bold;
-  color: rgb(191, 202, 198);
-  background: linear-gradient(45deg, #1a2723, #080a09);
+  color: var(--text);
+  background: linear-gradient(45deg, var(--main), var(--dark));
 }
 
 a {

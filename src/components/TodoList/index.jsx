@@ -2,6 +2,7 @@ import styles from "./TodoList.module.css";
 import TodoItem from "../TodoItem";
 import Form from "../Form";
 import { useOutletContext } from "react-router-dom";
+import { useContext } from "react";
 
 export default function TodoList() {
   const { tasks, addRerender, removeRerender, editRerender } =
