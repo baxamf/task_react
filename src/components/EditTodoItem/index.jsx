@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { BiTask } from "react-icons/bi";
+import { BiTaskX } from "react-icons/bi";
 import Queries from "../../api";
 import Button from "../UI/Button";
 import Input from "../UI/Input/Input";
@@ -9,50 +11,62 @@ export default function EditTodoItem() {
   let { id } = useParams();
   let navigate = useNavigate();
   const [task, setTask] = useState({});
-  const [inputVisibility, setInputVisibility] = useState(false);
+  const [completed, setCompleted] = useState(null);
   const [taskInput, setTaskInput] = useState("");
+  const [inputVisibility, setInputVisibility] = useState(false);
   const { editRerender } = useOutletContext();
 
   useEffect(() => {
     Queries.getSingle(id).then((resp) => {
+      setCompleted(resp.data.completed);
       setTask(resp.data);
     });
   }, [id]);
 
-  const editTask = (e) => {
-    e.stopPropagation();
-    if (taskInput.trim() === "") {
-      setTaskInput(task.title);
-      setInputVisibility(() => !inputVisibility);
-      return;
-    }
-    if (inputVisibility && taskInput !== task.title) {
-      const newTitle = { title: taskInput.trim() };
-      Queries.edit(id, newTitle);
-      editRerender(id, newTitle);
-      navigate("/");
-    }
+  const editTask = () => {
+    setTaskInput(task.title);
     setInputVisibility(() => !inputVisibility);
   };
 
-  const completeTask = (e) => {
-    if (inputVisibility) return {};
-    const newStatus = { completed: !task.completed };
-    Queries.edit(id, newStatus);
+  const saveTask = () => {
+    if (taskInput.trim() !== "" && taskInput.trim() !== task.title) {
+      const newTitle = { title: taskInput.trim(), completed: task.completed };
+      Queries.edit(id, newTitle);
+      editRerender(id, newTitle);
+      navigate("/");
+    } else if (task.completed !== completed) {
+      const newStatus = { completed: task.completed };
+      Queries.edit(id, newStatus);
+      editRerender(id, newStatus);
+      navigate("/");
+    } else {
+      navigate("/");
+    }
+  };
+
+  const completeTask = () => {
+    setTask((prev) => ({ ...prev, completed: !prev.completed }));
   };
 
   const taskInputHandler = (e) => setTaskInput(e.target.value);
 
   return (
-    <div className={styles.edit} onClick={completeTask}>
+    <div className={styles.edit}>
+      <div className={styles.status} onClick={completeTask}>
+        {task.completed ? <BiTask /> : <BiTaskX />}
+        <p>Completed</p>
+      </div>
       {inputVisibility ? (
         <Input value={taskInput} changeInput={taskInputHandler} />
       ) : (
-        <h1>{task.title}</h1>
+        <>
+          <h1>{task.title}</h1>
+        </>
       )}
-      <Button onClick={editTask}>
-        {inputVisibility ? "Save" : "Edit task"}
-      </Button>
+      <div className={styles.btn_container}>
+        {!inputVisibility && <Button onClick={editTask}>Edit</Button>}
+        <Button onClick={saveTask}>{inputVisibility ? "Save" : "Home"}</Button>
+      </div>
     </div>
   );
 }
